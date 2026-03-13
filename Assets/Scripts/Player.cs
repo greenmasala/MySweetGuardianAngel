@@ -9,9 +9,9 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     Rigidbody rb;
-    int turns = 3;
+    [SerializeField] int turns = 3;
     Vector2 mouse;
-    public float MouseSen = 0.5f;
+    [SerializeField] float MouseSen = 0.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
