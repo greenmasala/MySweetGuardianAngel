@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] int turns = 3;
     Vector2 mouse;
     [SerializeField] float MouseSen = 0.5f;
-    float timeCooldown = 10f;
+    float timeValue = 3.5f;
+    float timeCooldown = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,17 +37,24 @@ public class Player : MonoBehaviour
             Debug.Log("turns remaining: " + turns);
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) && timeValue > 0)
         {
+            Mathf.Clamp(timeValue, 0f, 3.5f);
             Time.timeScale = 0.2f;
-            timeCooldown -= Time.deltaTime;
-            Debug.Log(timeCooldown);
+            timeValue -= Time.deltaTime;
+            timeCooldown = 1f;
+            Debug.Log(timeValue);
         }
-        else if (timeCooldown != 10)
+        else if (timeValue < 3.5f)
         {
-            timeCooldown += Time.deltaTime;
-            Debug.Log(timeCooldown);
             Time.timeScale = 1f;
+            timeCooldown -= Time.deltaTime;
+
+            if (timeCooldown < 0f)
+            {
+                timeValue += Time.deltaTime;
+                Debug.Log(timeValue);
+            }
         }
     }
 
