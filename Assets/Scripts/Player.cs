@@ -12,11 +12,11 @@ public class Player : MonoBehaviour
     [SerializeField] int turns = 3;
     Vector2 mouse;
     [SerializeField] float MouseSen = 0.5f;
+    float timeCooldown = 10f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Time.timeScale = 0.2f;
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) & turns != 0)
         {
             rb.linearVelocity = Vector3.zero;
-            rb.AddForce((Vector3.up + transform.forward) * 10, ForceMode.Impulse);
+            rb.AddForce((Vector3.up + transform.forward) * 10, ForceMode.Impulse);//gotta change this to use f = ma / also might remove vector3.up?
             turns--;
             Debug.Log("turns remaining: " + turns);
         }
@@ -39,9 +39,13 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
             Time.timeScale = 0.2f;
+            timeCooldown -= Time.deltaTime;
+            Debug.Log(timeCooldown);
         }
-        else
+        else if (timeCooldown != 10)
         {
+            timeCooldown += Time.deltaTime;
+            Debug.Log(timeCooldown);
             Time.timeScale = 1f;
         }
     }
@@ -57,6 +61,13 @@ public class Player : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var colRb = collision.gameObject.GetComponent<Rigidbody>();
+
+        colRb.AddForce(transform.forward * 30, ForceMode.Impulse);
     }
 }
 
