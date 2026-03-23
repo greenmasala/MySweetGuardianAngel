@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using TreeEditor;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
     public ParticleSystem JumpVFX;
     GameManager gameManager;
     public Volume SlowTimePP;
+    public TextMeshProUGUI TurnsText;
+    public TextMeshProUGUI SlowTimeText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +36,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TurnsText.text = turns.ToString();
+        SlowTimeText.text = timeValue.ToString("00.000");
         CameraRotation();
 
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
@@ -54,6 +59,7 @@ public class Player : MonoBehaviour
             Mathf.Clamp(timeValue, 0f, 3.5f);
             //Time.timeScale = 0.2f;
             gameManager.enemyTimeScale = .5f;
+            gameManager.timerTimeScale = .35f;
             timeValue -= Time.deltaTime;
             timeCooldown = 1f;
             Debug.Log(timeValue);
@@ -63,6 +69,7 @@ public class Player : MonoBehaviour
             SlowTimePP.gameObject.SetActive(false);
             //Time.timeScale = 1f;
             gameManager.enemyTimeScale = 1f;
+            gameManager.timerTimeScale = 1f;
             timeCooldown -= Time.deltaTime;
 
             if (timeCooldown < 0f)
@@ -88,10 +95,16 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        anim.SetBool("OnGround", true);
-        var colRb = collision.gameObject.GetComponent<Rigidbody>();
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            anim.SetBool("OnGround", true);
+        }
+       
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
-        colRb.AddForce(transform.forward * 30, ForceMode.Impulse);
+        var colRb = collision.gameObject.GetComponent<Rigidbody>();
+        colRb.AddForce(transform.forward * 60, ForceMode.Impulse);
     }
 }
 

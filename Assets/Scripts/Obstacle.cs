@@ -35,6 +35,7 @@ public class Obstacle : MonoBehaviour
         if (hit & !collision.gameObject.GetComponent<Player>())
         {
             Destroy(gameObject);
+            gameManager.obstacles.Remove(gameObject); 
         }
     }
 }
