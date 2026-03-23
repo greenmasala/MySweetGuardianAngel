@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static float player = 1;
-    public static float enemies = 1;
-    public static float global = 1;
+    public float enemyTimeScale = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -14,11 +14,15 @@ public class Player : MonoBehaviour
     [SerializeField] float MouseSen = 0.5f;
     float timeValue = 3.5f;
     float timeCooldown = 1f;
+    public Animator anim;
+    public ParticleSystem JumpVFX;
+    GameManager gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gameManager = FindFirstObjectByType<GameManager>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -31,6 +35,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) & turns != 0)
         {
+            JumpVFX.Play();
+            anim.SetTrigger("Jump");
+            anim.SetBool("OnGround", false);
             rb.linearVelocity = Vector3.zero;
             rb.AddForce((Vector3.up + transform.forward) * 10, ForceMode.Impulse);//gotta change this to use f = ma / also might remove vector3.up?
             turns--;
@@ -40,14 +47,16 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Q) && timeValue > 0)
         {
             Mathf.Clamp(timeValue, 0f, 3.5f);
-            Time.timeScale = 0.2f;
+            //Time.timeScale = 0.2f;
+            gameManager.enemyTimeScale = .5f;
             timeValue -= Time.deltaTime;
             timeCooldown = 1f;
             Debug.Log(timeValue);
         }
         else if (timeValue < 3.5f)
         {
-            Time.timeScale = 1f;
+            //Time.timeScale = 1f;
+            gameManager.enemyTimeScale = 1f;
             timeCooldown -= Time.deltaTime;
 
             if (timeCooldown < 0f)
@@ -73,6 +82,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        anim.SetBool("OnGround", true);
         var colRb = collision.gameObject.GetComponent<Rigidbody>();
 
         colRb.AddForce(transform.forward * 30, ForceMode.Impulse);
