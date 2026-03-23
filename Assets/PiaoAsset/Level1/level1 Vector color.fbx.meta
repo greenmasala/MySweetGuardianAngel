@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c6c65fd3dc7f6c14bb896838133e2ae3
+guid: fc0b5ed0049843f4fb17b5432c86eced
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,58 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Crosswalk
-    second: {fileID: 2100000, guid: f1271b2732c800c41a532f247f56968c, type: 2}
+      name: Level1
+    second: {fileID: -876546973899608171, guid: b080e64b0a0ce354687d35e32e05b2b4, type: 3}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bulid1 blue
-    second: {fileID: 2100000, guid: d146653516ac7194b963d8ef1b9fd9cf, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bulid1 yellow
-    second: {fileID: 2100000, guid: 334c12078e56561449a953e57e03a7fe, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bulid2 red
-    second: {fileID: 2100000, guid: 726cb776585880f4a8dde8886c93b14f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bulid2 white
-    second: {fileID: 2100000, guid: 9529f159264660843ae873e12acf9031, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bulid3 blue
-    second: {fileID: 2100000, guid: 0e85772fcf048014292e245165abb124, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bulid3 white
-    second: {fileID: 2100000, guid: 433f58ce6eeb69d4295c62f41b4dc7d9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: footpath
-    second: {fileID: 2100000, guid: f1271b2732c800c41a532f247f56968c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lane
-    second: {fileID: 2100000, guid: f1271b2732c800c41a532f247f56968c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pedestrian Light
-    second: {fileID: 2100000, guid: f1271b2732c800c41a532f247f56968c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: stop Light
-    second: {fileID: 2100000, guid: f1271b2732c800c41a532f247f56968c, type: 2}
+      name: crosswalk
+    second: {fileID: -876546973899608171, guid: b080e64b0a0ce354687d35e32e05b2b4, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -96,8 +51,8 @@ ModelImporter:
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -126,7 +81,7 @@ ModelImporter:
     useFileScale: 1
     strictVertexDataChecks: 0
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 58
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
