@@ -672,7 +672,7 @@ MonoBehaviour:
     m_Value: -0.01
   contrast:
     m_OverrideState: 1
-    m_Value: 4.4
+    m_Value: 25
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -681,7 +681,7 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 10
 --- !u!114 &4883246041440351551
 MonoBehaviour:
   m_ObjectHideFlags: 3
