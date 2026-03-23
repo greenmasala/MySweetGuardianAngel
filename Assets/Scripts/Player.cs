@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Jump");
             anim.SetBool("OnGround", false);
             rb.linearVelocity = Vector3.zero;
-            rb.AddForce((Vector3.up + transform.forward) * 10, ForceMode.Impulse);//gotta change this to use f = ma / also might remove vector3.up?
+            rb.AddForce((transform.up + transform.forward) * 10, ForceMode.Impulse);//gotta change this to use f = ma / also might remove vector3.up?
             turns--;
             Debug.Log("turns remaining: " + turns);
         }
