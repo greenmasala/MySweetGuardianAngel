@@ -73,9 +73,8 @@ public class Player : MonoBehaviour
             {
                 SFXManager.Instance.PlaySound(normalTimeSFX, transform, 1f);
             }
-        }
 
-            if (Input.GetKey(KeyCode.Q) && timeValue > 0)
+            if(Input.GetKey(KeyCode.Q) && timeValue > 0)
             {
                 SlowTimePP.gameObject.SetActive(true);
                 Mathf.Clamp(timeValue, 0f, 3.5f);
@@ -99,6 +98,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
     void CameraRotation()
     {
         if (!gameManager.Paused)

@@ -15,12 +15,14 @@ public class GameManager : MonoBehaviour
     public Canvas ResultSuccess;
     public Canvas ResultFailure;
     public bool Paused;
+    Player player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         obstacles.AddRange(GameObject.FindGameObjectsWithTag("Obstacle"));
         kid = FindFirstObjectByType<Kid>();
+        player = FindFirstObjectByType<Player>();
         Unpause();
     }
 
@@ -99,6 +101,7 @@ public class GameManager : MonoBehaviour
         ResultFailure.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        player.SlowTimePP.gameObject.SetActive(false);
     }
 
     void Lose()
@@ -108,5 +111,6 @@ public class GameManager : MonoBehaviour
         ResultSuccess.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        player.SlowTimePP.gameObject.SetActive(false);
     }
 }
