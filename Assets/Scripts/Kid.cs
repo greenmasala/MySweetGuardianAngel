@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Kid : MonoBehaviour
 {
+    public bool Hit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,6 +19,7 @@ public class Kid : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            Hit = true;
             Debug.Log("failed");
         }
     }
