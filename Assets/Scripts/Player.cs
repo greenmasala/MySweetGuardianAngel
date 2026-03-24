@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI SlowTimeText;
     public CinemachineCamera PlayerCam;
     Screenshake shake;
-    bool hasPlayed;
+    Settings settings;
+    //bool hasPlayed;
 
     [SerializeField] AudioClip jumpSFX;
     [SerializeField] AudioClip hitSFX;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         maxTimeValue = timeValue;
         shake = PlayerCam.GetComponent<Screenshake>();
+        settings = FindFirstObjectByType<Settings>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -104,8 +106,8 @@ public class Player : MonoBehaviour
     {
         if (!gameManager.Paused)
         {
-            mouse.x += Input.GetAxis("Mouse X") * MouseSen;
-            mouse.y += Input.GetAxis("Mouse Y") * MouseSen;
+            mouse.x += Input.GetAxis("Mouse X") * settings.MouseSen;
+            mouse.y += Input.GetAxis("Mouse Y") * settings.MouseSen;
             var rotation = Quaternion.Euler(Mathf.Clamp(-mouse.y, -75, 75), mouse.x, 0);
             rb.MoveRotation(rotation);
         }
