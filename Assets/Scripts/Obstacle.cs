@@ -40,7 +40,7 @@ public class Obstacle : MonoBehaviour
             var explosionPrefab = Instantiate(ExplosionVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
             Destroy(explosionPrefab.gameObject, 2f);
-            gameManager.obstacles.Remove(gameObject);
+            gameManager.obstacles.Remove(gameObject); //need to remove from list in auto delete aswell
             SFXManager.Instance.PlaySound(explosionSFX, transform, 1f);
         }
     }

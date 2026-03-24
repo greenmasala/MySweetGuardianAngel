@@ -134,7 +134,8 @@ public class Player : MonoBehaviour
             colRb.AddForce(transform.forward * 60, ForceMode.Impulse);
             collision.gameObject.GetComponent<TrailRenderer>().enabled = true;
             Destroy(hitPrefab.gameObject, 2f);
-            Destroy(colRb.gameObject, 7f);
+            //Destroy(colRb.gameObject, 7f);
+            //need to remove from list SOMEHOW
         }
     }
 }
