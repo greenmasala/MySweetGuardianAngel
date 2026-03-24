@@ -27,10 +27,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimerText.text = timer.ToString("00.000");
-
-        timer -= Time.deltaTime * timerTimeScale;
-        Debug.Log(timer);
+        if (!Paused)
+        {
+            TimerText.text = timer.ToString("00.000");
+            timer -= Time.deltaTime * timerTimeScale;
+        }
 
         if (obstacles.Count <= 0 & !Paused & !kid.Hit)
         {
@@ -92,7 +93,6 @@ public class GameManager : MonoBehaviour
 
     void Win()
     {
-        Time.timeScale = 0f;
         Paused = true;
         Debug.Log("WIN!!");
         ResultSuccess.gameObject.SetActive(true);
@@ -103,7 +103,6 @@ public class GameManager : MonoBehaviour
 
     void Lose()
     {
-        Time.timeScale = 0f;
         Paused = true;
         ResultFailure.gameObject.SetActive(true);
         ResultSuccess.gameObject.SetActive(false);

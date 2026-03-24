@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Drawing;
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
@@ -21,6 +24,12 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI SlowTimeText;
     public CinemachineCamera PlayerCam;
     Screenshake shake;
+    bool hasPlayed;
+
+    [SerializeField] AudioClip jumpSFX;
+    [SerializeField] AudioClip hitSFX;
+    [SerializeField] AudioClip slowTimeSFX;
+    [SerializeField] AudioClip normalTimeSFX;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,7 +62,18 @@ public class Player : MonoBehaviour
                 rb.AddForce((transform.up + transform.forward) * 10, ForceMode.Impulse);//gotta change this to use f = ma / also might remove vector3.up?
                 turns--;
                 Debug.Log("turns remaining: " + turns);
+                SFXManager.Instance.PlaySound(jumpSFX, transform, 1f);
             }
+
+            if (Input.GetKeyDown(KeyCode.Q) && timeValue > 0)
+            {
+                SFXManager.Instance.PlaySound(slowTimeSFX, transform, 1f);
+            }
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                SFXManager.Instance.PlaySound(normalTimeSFX, transform, 1f);
+            }
+        }
 
             if (Input.GetKey(KeyCode.Q) && timeValue > 0)
             {
@@ -64,9 +84,8 @@ public class Player : MonoBehaviour
                 gameManager.timerTimeScale = .35f;
                 timeValue -= Time.deltaTime;
                 timeCooldown = 1f;
-                Debug.Log(timeValue);
             }
-            else if (timeValue < maxTimeValue)
+            else if (timeValue < maxTimeValue || timeValue <= 0)
             {
                 SlowTimePP.gameObject.SetActive(false);
                 //Time.timeScale = 1f;
@@ -77,12 +96,9 @@ public class Player : MonoBehaviour
                 if (timeCooldown < 0f)
                 {
                     timeValue += Time.deltaTime;
-                    Debug.Log(timeValue);
                 }
             }
         }
-    }
-
     void CameraRotation()
     {
         if (!gameManager.Paused)
@@ -110,12 +126,21 @@ public class Player : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
+            SFXManager.Instance.PlaySound(hitSFX, transform, 1f);
             shake.StartCoroutine(shake.Shake(0.2f, 0.45f));
             var colRb = collision.gameObject.GetComponent<Rigidbody>();
             var hitPrefab = Instantiate(HitVFX, transform.position, Quaternion.identity);
+            colRb.useGravity = true;
             colRb.AddForce(transform.forward * 60, ForceMode.Impulse);
-            Destroy(hitPrefab, 2f);
+            collision.gameObject.GetComponent<TrailRenderer>().enabled = true;
+            Destroy(hitPrefab.gameObject, 2f);
+            Destroy(colRb.gameObject, 7f);
         }
     }
 }
+ 
+
+   
+
+
 

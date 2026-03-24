@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -5,6 +6,8 @@ public class Obstacle : MonoBehaviour
     GameManager gameManager;
     [SerializeField] bool hit;
     Rigidbody rb;
+    public GameObject ExplosionVFX;
+    [SerializeField] AudioClip explosionSFX;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,8 +37,11 @@ public class Obstacle : MonoBehaviour
         }
         if (hit & !collision.gameObject.GetComponent<Player>())
         {
+            var explosionPrefab = Instantiate(ExplosionVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            gameManager.obstacles.Remove(gameObject); 
+            Destroy(explosionPrefab.gameObject, 2f);
+            gameManager.obstacles.Remove(gameObject);
+            SFXManager.Instance.PlaySound(explosionSFX, transform, 1f);
         }
     }
 }
