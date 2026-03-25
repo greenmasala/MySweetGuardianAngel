@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Obstacle
+  - PostProcess
+  - Kid
   layers:
   - Default
   - TransparentFX

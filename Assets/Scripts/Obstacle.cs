@@ -35,13 +35,18 @@ public class Obstacle : MonoBehaviour
             }
             hit = true;
         }
-        if (hit & !collision.gameObject.GetComponent<Player>())
+        if (hit & !collision.gameObject.GetComponent<Player>() || collision.gameObject.GetComponent<Kid>() || collision.gameObject.CompareTag("Obstacle"))
         {
             var explosionPrefab = Instantiate(ExplosionVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
             Destroy(explosionPrefab.gameObject, 2f);
             gameManager.obstacles.Remove(gameObject); //need to remove from list in auto delete aswell
             SFXManager.Instance.PlaySound(explosionSFX, transform, 1f);
+
+            if (collision.gameObject.GetComponent<Rigidbody>() & !collision.gameObject.GetComponent<Player>())
+            {
+                Destroy(collision.gameObject);
+            }      
         }
     }
 }

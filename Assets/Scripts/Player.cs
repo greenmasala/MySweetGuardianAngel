@@ -25,7 +25,9 @@ public class Player : MonoBehaviour
     public CinemachineCamera PlayerCam;
     Screenshake shake;
     Settings settings;
-    //bool hasPlayed;
+    public TrailRenderer[] Trails;
+    bool onGround = true;
+    Kid kid;
 
     [SerializeField] AudioClip jumpSFX;
     [SerializeField] AudioClip hitSFX;
@@ -40,6 +42,11 @@ public class Player : MonoBehaviour
         maxTimeValue = timeValue;
         shake = PlayerCam.GetComponent<Screenshake>();
         settings = FindFirstObjectByType<Settings>();
+        TurnsText = GameObject.Find("Turns").GetComponent<TextMeshProUGUI>();
+        SlowTimeText = GameObject.Find("SlowTime").GetComponent<TextMeshProUGUI>();
+        SlowTimePP = GameObject.FindWithTag("PostProcess").GetComponent<Volume>();
+        kid = FindFirstObjectByType<Kid>();
+        Debug.Log(SlowTimePP);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -57,6 +64,10 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) & turns != 0)
             {
+                foreach (TrailRenderer trail in Trails)
+                {
+                    trail.enabled = true;
+                }
                 JumpVFX.Play();
                 anim.SetTrigger("Jump");
                 anim.SetBool("OnGround", false);
@@ -65,6 +76,7 @@ public class Player : MonoBehaviour
                 turns--;
                 Debug.Log("turns remaining: " + turns);
                 SFXManager.Instance.PlaySound(jumpSFX, transform, 1f);
+                onGround = false;
             }
 
             if (Input.GetKeyDown(KeyCode.Q) && timeValue > 0)
@@ -78,7 +90,7 @@ public class Player : MonoBehaviour
 
             if(Input.GetKey(KeyCode.Q) && timeValue > 0)
             {
-                SlowTimePP.gameObject.SetActive(true);
+                SlowTimePP.enabled = true;
                 Mathf.Clamp(timeValue, 0f, 3.5f);
                 //Time.timeScale = 0.2f;
                 gameManager.enemyTimeScale = .5f;
@@ -88,7 +100,7 @@ public class Player : MonoBehaviour
             }
             else if (timeValue < maxTimeValue || timeValue <= 0)
             {
-                SlowTimePP.gameObject.SetActive(false);
+                SlowTimePP.enabled = false;
                 //Time.timeScale = 1f;
                 gameManager.enemyTimeScale = 1f;
                 gameManager.timerTimeScale = 1f;
@@ -123,8 +135,18 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             anim.SetBool("OnGround", true);
+            foreach (TrailRenderer trail in Trails)
+            {
+                trail.enabled = false;
+            }
+
+            if (!onGround)
+            {
+                JumpVFX.Play();
+                onGround = true;
+            }
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Kid"))
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
@@ -134,9 +156,14 @@ public class Player : MonoBehaviour
             var colRb = collision.gameObject.GetComponent<Rigidbody>();
             var hitPrefab = Instantiate(HitVFX, transform.position, Quaternion.identity);
             colRb.useGravity = true;
-            colRb.AddForce(transform.forward * 60, ForceMode.Impulse);
+            colRb.AddForce((transform.up + transform.forward) * 55, ForceMode.Impulse); //prev transform.forward * 60
             collision.gameObject.GetComponent<TrailRenderer>().enabled = true;
             Destroy(hitPrefab.gameObject, 2f);
+
+            if (collision.gameObject.CompareTag("Kid"))
+            {
+                kid.Hit = true;
+            }
             //Destroy(colRb.gameObject, 7f);
             //need to remove from list SOMEHOW
         }
