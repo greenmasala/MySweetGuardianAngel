@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     Kid kid;
     public TextMeshProUGUI TimerText;
     public TextMeshProUGUI TimeSuccess;
+    public TextMeshProUGUI TurnsSuccessText;
     public Canvas PauseMenu;
     public Canvas ResultSuccess;
     public Canvas ResultFailure;
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         player.SlowTimePP.gameObject.SetActive(false);
         TimeSuccess.text = timer.ToString("00.000");
+        TurnsSuccessText.text = player.turns.ToString();
     }
 
     void Lose()

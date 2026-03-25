@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 public class Player : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] int turns = 3;
+    public int turns = 3;
     Vector2 mouse;
     [SerializeField] float MouseSen = 0.5f;
     [SerializeField] float timeValue = 3.5f;
