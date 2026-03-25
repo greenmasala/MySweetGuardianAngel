@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public bool Paused;
     Player player;
     public bool Started;
+    public Animator TransitionAnim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
         kid = FindFirstObjectByType<Kid>();
         player = FindFirstObjectByType<Player>();
         Unpause();
+        TransitionAnim = GameObject.Find("Transition").GetComponent<Animator>();
+        TransitionAnim.updateMode = AnimatorUpdateMode.Normal;
     }
 
     // Update is called once per frame
@@ -69,6 +73,7 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
+        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Time.timeScale = 0f;
         PauseMenu.gameObject.SetActive(true);
         Paused = true;
@@ -88,17 +93,26 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Paused = false;
+        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        StartCoroutine(LoadNewLevel());
+    }
+
+    public void NextLevel()
+    {
+        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        TransitionAnim.SetTrigger("Clicked");
     }
 
     public void ReturnToMenu()
     {
+        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Debug.Log("Return to menu");
+        TransitionAnim.SetTrigger("Clicked");
     }
 
     void Win()
     {
+        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Paused = true;
         Debug.Log("WIN!!");
         ResultSuccess.gameObject.SetActive(true);
@@ -112,11 +126,20 @@ public class GameManager : MonoBehaviour
 
     void Lose()
     {
+        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Paused = true;
         ResultFailure.gameObject.SetActive(true);
         ResultSuccess.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         player.SlowTimePP.gameObject.SetActive(false);
+    }
+
+    IEnumerator LoadNewLevel()
+    {
+        TransitionAnim.SetTrigger("Clicked");
+        yield return new WaitForSecondsRealtime(.55f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Paused = false;
     }
 }
