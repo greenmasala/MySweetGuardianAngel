@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Drawing;
+using System.Transactions;
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -77,6 +78,7 @@ public class Player : MonoBehaviour
                 Debug.Log("turns remaining: " + turns);
                 SFXManager.Instance.PlaySound(jumpSFX, transform, 1f);
                 onGround = false;
+                gameManager.Started = true;
             }
 
             if (Input.GetKeyDown(KeyCode.Q) && timeValue > 0)
@@ -93,7 +95,7 @@ public class Player : MonoBehaviour
                 SlowTimePP.enabled = true;
                 Mathf.Clamp(timeValue, 0f, 3.5f);
                 //Time.timeScale = 0.2f;
-                gameManager.enemyTimeScale = .5f;
+                gameManager.enemyTimeScale = .65f; //.5f
                 gameManager.timerTimeScale = .35f;
                 timeValue -= Time.deltaTime;
                 timeCooldown = 1f;

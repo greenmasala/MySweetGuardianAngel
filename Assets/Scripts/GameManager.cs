@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] float timer = 25f;
     Kid kid;
     public TextMeshProUGUI TimerText;
+    public TextMeshProUGUI TimeSuccess;
     public Canvas PauseMenu;
     public Canvas ResultSuccess;
     public Canvas ResultFailure;
     public bool Paused;
     Player player;
+    public bool Started;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,9 +31,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Paused)
+        TimerText.text = timer.ToString("00.000");
+
+        if (!Paused & Started)
         {
-            TimerText.text = timer.ToString("00.000");
             timer -= Time.deltaTime * timerTimeScale;
         }
 
@@ -102,6 +105,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         player.SlowTimePP.gameObject.SetActive(false);
+        TimeSuccess.text = timer.ToString("00.000");
     }
 
     void Lose()

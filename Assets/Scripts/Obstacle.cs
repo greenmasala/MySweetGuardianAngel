@@ -23,6 +23,14 @@ public class Obstacle : MonoBehaviour
             rb.linearVelocity *= gameManager.enemyTimeScale;
             rb.angularVelocity *= gameManager.enemyTimeScale;
         }
+        if (!gameManager.Started)
+        {
+            rb.isKinematic = true;
+        }
+        else
+        {
+            rb.isKinematic = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
