@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public TrailRenderer[] Trails;
     bool onGround = true;
     Kid kid;
+    float acc = 55;
 
     [SerializeField] AudioClip jumpSFX;
     [SerializeField] AudioClip hitSFX;
@@ -158,7 +159,9 @@ public class Player : MonoBehaviour
             var colRb = collision.gameObject.GetComponent<Rigidbody>();
             var hitPrefab = Instantiate(HitVFX, transform.position, Quaternion.identity);
             colRb.useGravity = true;
-            colRb.AddForce((transform.up + transform.forward) * 55, ForceMode.Impulse); //prev transform.forward * 60
+            float force = colRb.mass * acc;
+            colRb.AddForce((transform.up + transform.forward) * force, ForceMode.Impulse);
+            //prev transform.forward * 60
             collision.gameObject.GetComponent<TrailRenderer>().enabled = true;
             Destroy(hitPrefab.gameObject, 2f);
 
