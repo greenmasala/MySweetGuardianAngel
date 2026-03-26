@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     Player player;
     public bool Started;
     public Animator TransitionAnim;
+    int levelID;
+    int nextLevelID;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +31,9 @@ public class GameManager : MonoBehaviour
         kid = FindFirstObjectByType<Kid>();
         player = FindFirstObjectByType<Player>();
         Unpause();
+        levelID = SceneManager.GetActiveScene().buildIndex;
+        nextLevelID = levelID + 1;
+        Debug.Log(nextLevelID);
         TransitionAnim = GameObject.Find("Transition").GetComponent<Animator>();
         TransitionAnim.updateMode = AnimatorUpdateMode.Normal;
     }
@@ -94,13 +99,13 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
-        StartCoroutine(LoadNewLevel());
+        StartCoroutine(LoadLevel(levelID));
     }
 
     public void NextLevel()
     {
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
-        TransitionAnim.SetTrigger("Clicked");
+        StartCoroutine(LoadLevel(nextLevelID));
     }
 
     public void ReturnToMenu()
@@ -135,11 +140,11 @@ public class GameManager : MonoBehaviour
         player.SlowTimePP.gameObject.SetActive(false);
     }
 
-    IEnumerator LoadNewLevel()
+    IEnumerator LoadLevel(int levelID)
     {
         TransitionAnim.SetTrigger("Clicked");
         yield return new WaitForSecondsRealtime(.55f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(levelID);
         Paused = false;
     }
 }

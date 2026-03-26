@@ -65,6 +65,10 @@ PrefabInstance:
       value: car
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 69d26e2203f5a3c4c845dee8f653a49b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 69d26e2203f5a3c4c845dee8f653a49b, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
