@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public bool Paused;
     Player player;
     public bool Started;
+    bool win;
     public Animator TransitionAnim;
     int levelID;
     int nextLevelID;
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
             Win();
         }
 
-        if (kid.Hit)
+        if (kid.Hit & !win)
         {
             Lose();
         }
@@ -118,6 +119,7 @@ public class GameManager : MonoBehaviour
 
     void Win()
     {
+        win = true;
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Paused = true;
         Debug.Log("WIN!!");
