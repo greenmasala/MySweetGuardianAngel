@@ -90,6 +90,9 @@ PrefabInstance:
       addedObject: {fileID: 8920145496290107639}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eeda7716174be63478bcde17760d181d, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1612351242287970274}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eeda7716174be63478bcde17760d181d, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4672578741499664113}
   m_SourcePrefab: {fileID: 100100000, guid: eeda7716174be63478bcde17760d181d, type: 3}
 --- !u!1 &5389771932216962602 stripped
@@ -279,6 +282,27 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!135 &1612351242287970274
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389771932216962602}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.9657087
+  m_Center: {x: -0.005083799, y: 0.0068708058, z: -0.0017182229}
 --- !u!75 &4672578741499664113
 ConstantForce:
   m_ObjectHideFlags: 0
