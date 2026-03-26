@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Canvas PauseMenu;
     public Canvas ResultSuccess;
     public Canvas ResultFailure;
+    public Canvas SettingsMenu;
     public bool Paused;
     Player player;
     public bool Started;
@@ -146,5 +147,17 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(.55f);
         SceneManager.LoadScene(levelID);
         Paused = false;
+    }
+
+    public void OpenSettings()
+    {
+        SettingsMenu.gameObject.SetActive(true);
+        PauseMenu.gameObject.SetActive(false);
+    }
+
+    public void CloseSettings()
+    {
+        SettingsMenu.gameObject.SetActive(false);
+        PauseMenu.gameObject.SetActive(true);
     }
 }

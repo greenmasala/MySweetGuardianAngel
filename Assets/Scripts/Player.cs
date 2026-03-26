@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     Settings settings;
     public TrailRenderer[] Trails;
     bool onGround = true;
+    bool timeSlowed;
     Kid kid;
     float acc = 55;
 
@@ -82,13 +83,15 @@ public class Player : MonoBehaviour
                 gameManager.Started = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.Q) && timeValue > 0)
+            if (Input.GetKeyDown(KeyCode.Q) & timeValue > 0)
             {
                 SFXManager.Instance.PlaySound(slowTimeSFX, transform, 1f);
+                timeSlowed = true;
             }
-            if (Input.GetKeyUp(KeyCode.Q))
+            if (Input.GetKeyUp(KeyCode.Q) & timeValue > 0)
             {
                 SFXManager.Instance.PlaySound(normalTimeSFX, transform, 1f);
+                timeSlowed = false;
             }
 
             if(Input.GetKey(KeyCode.Q) && timeValue > 0)
@@ -108,6 +111,12 @@ public class Player : MonoBehaviour
                 gameManager.enemyTimeScale = 1f;
                 gameManager.timerTimeScale = 1f;
                 timeCooldown -= Time.deltaTime;
+
+                if (timeSlowed)
+                {
+                    SFXManager.Instance.PlaySound(normalTimeSFX, transform, 1f);
+                    timeSlowed = false;
+                }
 
                 if (timeCooldown < 0f)
                 {

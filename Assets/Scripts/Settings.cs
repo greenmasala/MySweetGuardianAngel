@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -9,6 +10,10 @@ public class Settings: MonoBehaviour
     public Slider MusicSlider;
     public Slider SFXSlider;
     public Slider MouseSenSlider;
+    public TextMeshProUGUI MasterVolVal;
+    public TextMeshProUGUI MusicVolVal;
+    public TextMeshProUGUI SFXVolVal;
+    public TextMeshProUGUI MouseSenVal;
     public float MouseSen = 0.5f;
 
     private void Start()
@@ -29,23 +34,31 @@ public class Settings: MonoBehaviour
     public void SetMasterVol(float vol)
     {
         audioMixer.SetFloat("MasterVol", Mathf.Log10(vol) * 20f);
+        var percentage = (vol / 1) * 100;
+        MasterVolVal.text = percentage.ToString("F0");
         PlayerPrefs.SetFloat("MasterVol", vol);
     }
     public void SetMusicVol(float vol)
     {
         audioMixer.SetFloat("MusicVol", Mathf.Log10(vol) * 20f);
+        var percentage = (vol / 1) * 100;
+        MusicVolVal.text = percentage.ToString("F0");
         PlayerPrefs.SetFloat("MusicVol", vol);
     }
 
     public void SetSFXVol(float vol)
     {
         audioMixer.SetFloat("SFXVol", Mathf.Log10(vol) * 20f);
+        var percentage = (vol / 1) * 100;
+        SFXVolVal.text = percentage.ToString("F0");
         PlayerPrefs.SetFloat("SFXVol", vol);
     }
 
     public void SetMouseSen(float sen)
     {
         sen = MouseSenSlider.value;
+        var percentage = (sen / 1) * 100;
+        MouseSenVal.text = percentage.ToString("F0");
         MouseSen = sen;
         PlayerPrefs.SetFloat("MouseSen", MouseSen);
     }
