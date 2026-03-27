@@ -17,9 +17,11 @@ public class GameManager : MonoBehaviour
     public Canvas PauseMenu;
     public Canvas ResultSuccess;
     public Canvas ResultFailure;
+    public Canvas SettingsMenu;
     public bool Paused;
     Player player;
     public bool Started;
+    bool win;
     public Animator TransitionAnim;
     int levelID;
     int nextLevelID;
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
             Win();
         }
 
-        if (kid.Hit)
+        if (kid.Hit & !win)
         {
             Lose();
         }
@@ -117,6 +119,7 @@ public class GameManager : MonoBehaviour
 
     void Win()
     {
+        win = true;
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Paused = true;
         Debug.Log("WIN!!");
@@ -146,5 +149,17 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(.55f);
         SceneManager.LoadScene(levelID);
         Paused = false;
+    }
+
+    public void OpenSettings()
+    {
+        SettingsMenu.gameObject.SetActive(true);
+        PauseMenu.gameObject.SetActive(false);
+    }
+
+    public void CloseSettings()
+    {
+        SettingsMenu.gameObject.SetActive(false);
+        PauseMenu.gameObject.SetActive(true);
     }
 }

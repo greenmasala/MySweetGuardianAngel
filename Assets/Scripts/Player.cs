@@ -28,7 +28,9 @@ public class Player : MonoBehaviour
     Settings settings;
     public TrailRenderer[] Trails;
     bool onGround = true;
+    bool timeSlowed;
     Kid kid;
+    float acc = 55;
 
     [SerializeField] AudioClip jumpSFX;
     [SerializeField] AudioClip hitSFX;
@@ -81,13 +83,15 @@ public class Player : MonoBehaviour
                 gameManager.Started = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.Q) && timeValue > 0)
+            if (Input.GetKeyDown(KeyCode.Q) & timeValue > 0)
             {
                 SFXManager.Instance.PlaySound(slowTimeSFX, transform, 1f);
+                timeSlowed = true;
             }
-            if (Input.GetKeyUp(KeyCode.Q))
+            if (Input.GetKeyUp(KeyCode.Q) & timeValue > 0)
             {
                 SFXManager.Instance.PlaySound(normalTimeSFX, transform, 1f);
+                timeSlowed = false;
             }
 
             if(Input.GetKey(KeyCode.Q) && timeValue > 0)
@@ -107,6 +111,12 @@ public class Player : MonoBehaviour
                 gameManager.enemyTimeScale = 1f;
                 gameManager.timerTimeScale = 1f;
                 timeCooldown -= Time.deltaTime;
+
+                if (timeSlowed)
+                {
+                    SFXManager.Instance.PlaySound(normalTimeSFX, transform, 1f);
+                    timeSlowed = false;
+                }
 
                 if (timeCooldown < 0f)
                 {
@@ -158,7 +168,9 @@ public class Player : MonoBehaviour
             var colRb = collision.gameObject.GetComponent<Rigidbody>();
             var hitPrefab = Instantiate(HitVFX, transform.position, Quaternion.identity);
             colRb.useGravity = true;
-            colRb.AddForce((transform.up + transform.forward) * 55, ForceMode.Impulse); //prev transform.forward * 60
+            float force = colRb.mass * acc;
+            colRb.AddForce((transform.up + transform.forward) * force, ForceMode.Impulse);
+            //prev transform.forward * 60
             collision.gameObject.GetComponent<TrailRenderer>().enabled = true;
             Destroy(hitPrefab.gameObject, 2f);
 
