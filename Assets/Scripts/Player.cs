@@ -171,7 +171,7 @@ public class Player : MonoBehaviour
             float force = colRb.mass * acc;
             colRb.AddForce((transform.up + transform.forward) * force, ForceMode.Impulse);
             //prev transform.forward * 60
-            collision.gameObject.GetComponent<TrailRenderer>().enabled = true;
+            //collision.gameObject.GetComponent<TrailRenderer>().enabled = true;
             Destroy(hitPrefab.gameObject, 2f);
 
             if (collision.gameObject.CompareTag("Kid"))
