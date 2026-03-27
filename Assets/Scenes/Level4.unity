@@ -178,9 +178,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5711052370896006010, guid: a7c57cc973cf7444383b3c75b5b21b9a, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: -2932666283545867464, guid: a7c57cc973cf7444383b3c75b5b21b9a, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a7c57cc973cf7444383b3c75b5b21b9a, type: 3}
       propertyPath: m_Name
       value: level4 floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a7c57cc973cf7444383b3c75b5b21b9a, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1039,15 +1051,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4721885296006395024, guid: f1ca83d71633a5a4bbf3b1b954abe9cb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.48
+      value: -22.48
       objectReference: {fileID: 0}
     - target: {fileID: 4721885296006395024, guid: f1ca83d71633a5a4bbf3b1b954abe9cb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.56
+      value: -4.05
       objectReference: {fileID: 0}
     - target: {fileID: 4721885296006395024, guid: f1ca83d71633a5a4bbf3b1b954abe9cb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.03
+      value: -14.95
       objectReference: {fileID: 0}
     - target: {fileID: 4721885296006395024, guid: f1ca83d71633a5a4bbf3b1b954abe9cb, type: 3}
       propertyPath: m_LocalRotation.w
