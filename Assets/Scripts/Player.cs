@@ -41,13 +41,14 @@ public class Player : MonoBehaviour
         maxTimeValue = timeValue;
         shake = PlayerCam.GetComponent<Screenshake>();
         settings = FindFirstObjectByType<Settings>();
+        Debug.Log(settings.MouseSen);
         TurnsText = GameObject.Find("Turns").GetComponent<TextMeshProUGUI>();
         SlowTimeText = GameObject.Find("SlowTime").GetComponent<TextMeshProUGUI>();
         SlowTimePP = GameObject.FindWithTag("PostProcess").GetComponent<Volume>();
         kid = FindFirstObjectByType<Kid>();
         Debug.Log(SlowTimePP);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -57,7 +58,7 @@ public class Player : MonoBehaviour
         SlowTimeText.text = timeValue.ToString("00.000");
         CameraRotation();
 
-        Time.fixedDeltaTime = 0.02F * Time.timeScale;
+        Time.fixedDeltaTime = 0.02F * Time.timeScale; 
 
         if (!gameManager.Paused)
         {

@@ -101,5 +101,4 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(name);
         Debug.Log("Scene"+ name + "loaded");
     }
-
 }

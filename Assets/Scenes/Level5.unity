@@ -3621,6 +3621,7 @@ MonoBehaviour:
   ResultFailure: {fileID: 1779463815}
   SettingsMenu: {fileID: 685069721}
   Credits: {fileID: 800039413}
+  SettingsRef: {fileID: 0}
   Paused: 0
   Started: 0
   TransitionAnim: {fileID: 0}
@@ -5003,7 +5004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 20305337663334407, guid: fd885184bd5bc624783cf3cc89b2e067, type: 3}
       propertyPath: turns
-      value: 999
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 20305337663334407, guid: fd885184bd5bc624783cf3cc89b2e067, type: 3}
       propertyPath: TurnsText
@@ -5011,7 +5012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 20305337663334407, guid: fd885184bd5bc624783cf3cc89b2e067, type: 3}
       propertyPath: timeValue
-      value: 999
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 20305337663334407, guid: fd885184bd5bc624783cf3cc89b2e067, type: 3}
       propertyPath: SlowTimePP

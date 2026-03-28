@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Canvas ResultFailure;
     public Canvas SettingsMenu;
     public Canvas Credits;
+    public Settings SettingsRef;
     public bool Paused;
     Player player;
     public bool Started;
@@ -31,10 +32,11 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Paused = false;
         obstacles.AddRange(GameObject.FindGameObjectsWithTag("Obstacle"));
         kid = FindFirstObjectByType<Kid>();
         player = FindFirstObjectByType<Player>();
+        SettingsRef = FindFirstObjectByType<Settings>();
+
         Unpause();
         levelID = SceneManager.GetActiveScene().buildIndex;
         nextLevelID = levelID + 1;
@@ -69,7 +71,7 @@ public class GameManager : MonoBehaviour
             Win();
         }
 
-        if (Input.GetKeyDown(KeyCode.P) & !lose & !win)
+        if (Input.GetKeyDown(KeyCode.Escape) & !lose & !win)
         {
             if (Paused == true)
             {
@@ -88,8 +90,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         PauseMenu.gameObject.SetActive(true);
         Paused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
         Debug.Log("paused");
     }
 
@@ -98,22 +100,23 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         PauseMenu.gameObject.SetActive(false);
         Paused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
         SettingsMenu.gameObject.SetActive(false);
     }
 
     public void Restart()
     {
+        Time.timeScale = 1f;
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Paused = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
         StartCoroutine(LoadLevel(levelID));
     }
 
     public void NextLevel()
     {
+        Time.timeScale = 1f;
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         StartCoroutine(LoadLevel(nextLevelID));
         Paused = false;
@@ -137,8 +140,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("WIN!!");
         ResultSuccess.gameObject.SetActive(true);
         ResultFailure.gameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
         player.SlowTimePP.gameObject.SetActive(false);
         TimeSuccess.text = timer.ToString("00.000");
         TurnsSuccessText.text = player.turns.ToString();
@@ -151,7 +154,7 @@ public class GameManager : MonoBehaviour
         Paused = true;
         ResultFailure.gameObject.SetActive(true);
         ResultSuccess.gameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         player.SlowTimePP.gameObject.SetActive(false);
     }
