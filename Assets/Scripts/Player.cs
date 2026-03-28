@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Drawing;
-using System.Transactions;
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
@@ -135,11 +131,6 @@ public class Player : MonoBehaviour
             var rotation = Quaternion.Euler(Mathf.Clamp(-mouse.y, -75, 75), mouse.x, 0);
             rb.MoveRotation(rotation);
         }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        Destroy(other.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

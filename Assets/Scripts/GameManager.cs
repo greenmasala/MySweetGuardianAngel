@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Paused = false;
         obstacles.AddRange(GameObject.FindGameObjectsWithTag("Obstacle"));
         kid = FindFirstObjectByType<Kid>();
         player = FindFirstObjectByType<Player>();
@@ -68,12 +69,12 @@ public class GameManager : MonoBehaviour
             Win();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) & !lose & !win)
+        if (Input.GetKeyDown(KeyCode.P) & !lose & !win)
         {
             if (Paused == true)
             {
                 Unpause();
-                CloseSettings();
+                //CloseSettings();
             }
             else
             {
@@ -99,11 +100,15 @@ public class GameManager : MonoBehaviour
         Paused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        SettingsMenu.gameObject.SetActive(false);
     }
 
     public void Restart()
     {
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Paused = false;
         StartCoroutine(LoadLevel(levelID));
     }
 
@@ -111,6 +116,7 @@ public class GameManager : MonoBehaviour
     {
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         StartCoroutine(LoadLevel(nextLevelID));
+        Paused = false;
     }
 
     public void ReturnToMenu()
@@ -120,6 +126,7 @@ public class GameManager : MonoBehaviour
         TransitionAnim.SetTrigger("Clicked");
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1f;
+        Paused = false;
     }
 
     void Win()
