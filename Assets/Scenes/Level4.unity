@@ -334,6 +334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'UI '
       objectReference: {fileID: 0}
+    - target: {fileID: 1266017244428502228, guid: 7f22259c270f6bf43826cb370e590d99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2348794333332046912, guid: 7f22259c270f6bf43826cb370e590d99, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

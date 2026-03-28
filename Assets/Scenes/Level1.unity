@@ -192,6 +192,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4432020e36e26f946a400515834f11b7, type: 3}
   m_PrefabInstance: {fileID: 40430626}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &146798610 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2377022656417743310, guid: 7f22259c270f6bf43826cb370e590d99, type: 3}
+  m_PrefabInstance: {fileID: 245305049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &152782828
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,55 +334,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.40119, y: -7.01022, z: 20.45476}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &163282746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 163282748}
-  - component: {fileID: 163282747}
-  m_Layer: 0
-  m_Name: PostProcess
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &163282747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163282746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 1122887e8487e794290161c6c5de017f, type: 2}
---- !u!4 &163282748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163282746}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.863464, y: -12.541133, z: -6.1369395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1478,6 +1434,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2110286380847560939, guid: e7e7514a7cba9d946a163d8b1bb94c8e, type: 3}
   m_PrefabInstance: {fileID: 508980168}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &509308138 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7668967027510056142, guid: 7f22259c270f6bf43826cb370e590d99, type: 3}
+  m_PrefabInstance: {fileID: 245305049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &513153928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1640,6 +1601,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!223 &552906764 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2737807430550237259, guid: 7f22259c270f6bf43826cb370e590d99, type: 3}
+  m_PrefabInstance: {fileID: 245305049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &640447343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3355,13 +3321,14 @@ MonoBehaviour:
   TimerText: {fileID: 524274575}
   TimeSuccess: {fileID: 14031173}
   TurnsSuccessText: {fileID: 520221816}
-  uiDocument: {fileID: 0}
-  fullHeart: {fileID: 0}
-  brokenHeart: {fileID: 0}
-  TransitionAnim: {fileID: 0}
+  PauseMenu: {fileID: 552906764}
+  ResultSuccess: {fileID: 146798610}
+  ResultFailure: {fileID: 509308138}
+  SettingsMenu: {fileID: 370539001}
+  Credits: {fileID: 0}
   Paused: 0
   Started: 0
-  settingsCanvas: {fileID: 0}
+  TransitionAnim: {fileID: 0}
 --- !u!1001 &1603178041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3998,88 +3965,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6b5a67915ba4e14492a0f5491b3515b, type: 3}
---- !u!1 &1842549365
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1842549367}
-  - component: {fileID: 1842549366}
-  - component: {fileID: 1842549368}
-  m_Layer: 5
-  m_Name: UIDocument
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1842549366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842549365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: d01f33144858c2d4cab0fa92b09a9ee2, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 5e9300cf40db13d49a22d2c8a8fef947, type: 3}
-  m_SortingOrder: 0
-  m_Position: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
---- !u!4 &1842549367
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842549365}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1842549368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842549365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c82d85b3dfca25e42bf5f38da246f60c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  enemyTimeScale: 1
-  timerTimeScale: 1
-  obstacles: []
-  timer: 25
-  TimerText: {fileID: 0}
-  TimeSuccess: {fileID: 0}
-  TurnsSuccessText: {fileID: 0}
-  uiDocument: {fileID: 1842549366}
-  fullHeart: {fileID: 0}
-  brokenHeart: {fileID: 0}
-  TransitionAnim: {fileID: 0}
-  Paused: 0
-  Started: 0
-  settingsCanvas: {fileID: 370539001}
 --- !u!1001 &1858003942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5148,7 +5033,6 @@ SceneRoots:
   - {fileID: 245305049}
   - {fileID: 443483268255219007}
   - {fileID: 1910979344}
-  - {fileID: 163282748}
   - {fileID: 1718658308}
   - {fileID: 1563535125}
   - {fileID: 1691780892}
@@ -5160,4 +5044,3 @@ SceneRoots:
   - {fileID: 270878406}
   - {fileID: 1224947788}
   - {fileID: 152782831}
-  - {fileID: 1842549367}
