@@ -1,0 +1,19 @@
+#LevelNum {
+    display: none;
+    opacity: 0;
+    translate: 0 -10px;
+    transition-property: translate, opacity;
+    transition-duration: 0.2s;
+}
+
+#LevelButton1:hover #LevelNum {
+    display: flex;
+    opacity: 1;
+    translate: 0 0;
+}
+
+#LevelButton2:hover #LevelNum {
+    display: flex;
+    opacity: 1;
+    translate: 0 20px;
+}

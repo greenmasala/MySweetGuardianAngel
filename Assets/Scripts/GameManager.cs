@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,24 +13,72 @@ public class GameManager : MonoBehaviour
     public List<GameObject> obstacles = new List<GameObject>();
     [SerializeField] float timer = 25f;
     Kid kid;
+
     public TextMeshProUGUI TimerText;
     public TextMeshProUGUI TimeSuccess;
     public TextMeshProUGUI TurnsSuccessText;
-    public Canvas PauseMenu;
-    public Canvas ResultSuccess;
-    public Canvas ResultFailure;
-    public Canvas SettingsMenu;
+
+    //uitool kit (hud menus)
+    public UIDocument uiDocument;
+    private VisualElement root, pauseMenu, resultSuccess, resultFailure, hud;
+    private Label timerLabel, turnsSuccessLabel, timeSuccessLabel, slowTimeLabel;
+    private List<VisualElement> heartIcons = new List<VisualElement>();
+
+    //asset ref ui
+    [SerializeField] private Sprite fullHeart;
+    [SerializeField] private Sprite brokenHeart;
+    public Animator TransitionAnim;
+
+    //game state
     public bool Paused;
-    Player player;
     public bool Started;
     bool win;
-    public Animator TransitionAnim;
+
+    Player player;
     int levelID;
     int nextLevelID;
+
+    //gui
+    public Canvas settingsCanvas;
+
+
+    void Awake()
+    {
+        root = uiDocument.rootVisualElement;
+
+        pauseMenu = root.Q<VisualElement>("PauseMenu");
+        resultSuccess = root.Q<VisualElement>("ResultSuccess");
+        resultFailure = root.Q<VisualElement>("ResultFailure");
+        hud = root.Q<VisualElement>("HUD");
+
+        timerLabel = root.Q<Label>("TimerLabel");
+        timeSuccessLabel = root.Q<Label>("TimeSuccessText");
+        turnsSuccessLabel = root.Q<Label>("TurnsSuccessText");
+
+        root.Q<Button>("ResumeButton")?.RegisterCallback<ClickEvent>(evt => Unpause());
+        root.Q<Button>("RestartButton")?.RegisterCallback<ClickEvent>(evt => Restart());
+        root.Q<Button>("NextLevelButton")?.RegisterCallback<ClickEvent>(evt => NextLevel());
+        root.Q<Button>("MenuButton")?.RegisterCallback<ClickEvent>(evt => ReturnToMenu());
+        root.Q<Button>("SettingButton")?.RegisterCallback<ClickEvent>(evt => OpenSettings());
+
+        //find hearts
+        for (int i = 0; i < 3; i++)
+        {
+            VisualElement h = root.Q<VisualElement>($"Heart{i}");
+            if (h != null) heartIcons.Add(h);
+        }
+
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //display
+        SetDisplay(pauseMenu, false);
+        SetDisplay(resultSuccess, false);
+        SetDisplay(resultFailure, false);
+        SetDisplay(hud, true);
+
         obstacles.AddRange(GameObject.FindGameObjectsWithTag("Obstacle"));
         kid = FindFirstObjectByType<Kid>();
         player = FindFirstObjectByType<Player>();
@@ -45,57 +95,68 @@ public class GameManager : MonoBehaviour
     {
         TimerText.text = timer.ToString("00.000");
 
-        if (!Paused & Started)
+        if (!Paused && Started)
         {
             timer -= Time.deltaTime * timerTimeScale;
         }
 
-        if (obstacles.Count <= 0 & !Paused & !kid.Hit)
+        if (Started && !Paused)
         {
-            Win();
-        }
+            if (obstacles.Count <= 0 & !Paused & !kid.Hit)
+            {
+                Win();
+            }
 
-        if (kid.Hit & !win)
-        {
-            Lose();
-        }
+            if (kid.Hit & !win)
+            {
+                Lose();
+            }
         
-        if (!kid.Hit & timer <= 0)
-        {
-            timer = 0;
-            Win();
-        }
+            if (!kid.Hit & timer <= 0)
+            {
+                timer = 0;
+                Win();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Paused == true)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Unpause();
+                if (Paused == true)
+                {
+                    Unpause();
+                }
+                else
+                {
+                    Pause();
+                }
             }
-            else
-            {
-                Pause();
-            }
+
         }
     }
+
     public void Pause()
     {
-        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Time.timeScale = 0f;
-        PauseMenu.gameObject.SetActive(true);
+        SetDisplay(pauseMenu, true);
+        SetDisplay(hud, false);
         Paused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Debug.Log("paused");
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
     }
 
     public void Unpause()
     {
         Time.timeScale = 1f;
-        PauseMenu.gameObject.SetActive(false);
+        SetDisplay(pauseMenu, false);
+        settingsCanvas.gameObject.SetActive(false);
+        SetDisplay(hud, true);
         Paused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+    }
+    void SetDisplay(VisualElement element, bool show)
+    {
+        if (element != null)
+            element.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
     }
 
     public void Restart()
@@ -112,35 +173,42 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Debug.Log("Return to menu");
         TransitionAnim.SetTrigger("Clicked");
+        StartCoroutine(LoadMenuScene());
     }
 
-    void Win()
+    IEnumerator LoadMenuScene()
+    {
+        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        TransitionAnim.SetTrigger("Clicked");
+        yield return new WaitForSecondsRealtime(.55f);
+        SceneManager.LoadScene("MainMenu");
+
+    }
+
+    public void Win()
     {
         win = true;
-        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Paused = true;
-        Debug.Log("WIN!!");
-        ResultSuccess.gameObject.SetActive(true);
-        ResultFailure.gameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        player.SlowTimePP.gameObject.SetActive(false);
-        TimeSuccess.text = timer.ToString("00.000");
-        TurnsSuccessText.text = player.turns.ToString();
+        Time.timeScale = 0f;
+        SetDisplay(resultSuccess, true);
+        SetDisplay(hud, false);
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+
+        if (timeSuccessLabel != null) timeSuccessLabel.text = timer.ToString("00.000");
+        if (turnsSuccessLabel != null) turnsSuccessLabel.text = player.turns.ToString();
     }
 
     void Lose()
     {
-        TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Paused = true;
-        ResultFailure.gameObject.SetActive(true);
-        ResultSuccess.gameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        player.SlowTimePP.gameObject.SetActive(false);
+        Time.timeScale = 0f;
+        SetDisplay(resultFailure, true);
+        SetDisplay(hud, false);
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
     }
 
     IEnumerator LoadLevel(int levelID)
@@ -153,13 +221,13 @@ public class GameManager : MonoBehaviour
 
     public void OpenSettings()
     {
-        SettingsMenu.gameObject.SetActive(true);
-        PauseMenu.gameObject.SetActive(false);
+        SetDisplay(pauseMenu, false);
+        settingsCanvas.gameObject.SetActive(true);
     }
 
     public void CloseSettings()
     {
-        SettingsMenu.gameObject.SetActive(false);
-        PauseMenu.gameObject.SetActive(true);
+        settingsCanvas.gameObject.SetActive(false);
+        SetDisplay(pauseMenu, true);
     }
 }
