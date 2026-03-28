@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ff33af19770dd3e489f9c65e388009fe, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -178,9 +178,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5711052370896006010, guid: a7c57cc973cf7444383b3c75b5b21b9a, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: -2932666283545867464, guid: a7c57cc973cf7444383b3c75b5b21b9a, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a7c57cc973cf7444383b3c75b5b21b9a, type: 3}
       propertyPath: m_Name
       value: level4 floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a7c57cc973cf7444383b3c75b5b21b9a, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -250,7 +262,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: a3f238a64087bc64bb7abaa1d5ea4d8b, type: 2}
+  sharedProfile: {fileID: 11400000, guid: bd280b5a1ff150146af9940a8d60c17c, type: 2}
 --- !u!4 &163282748
 Transform:
   m_ObjectHideFlags: 0
@@ -1039,15 +1051,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4721885296006395024, guid: f1ca83d71633a5a4bbf3b1b954abe9cb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.48
+      value: -22.48
       objectReference: {fileID: 0}
     - target: {fileID: 4721885296006395024, guid: f1ca83d71633a5a4bbf3b1b954abe9cb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.56
+      value: -4.05
       objectReference: {fileID: 0}
     - target: {fileID: 4721885296006395024, guid: f1ca83d71633a5a4bbf3b1b954abe9cb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.03
+      value: -14.95
       objectReference: {fileID: 0}
     - target: {fileID: 4721885296006395024, guid: f1ca83d71633a5a4bbf3b1b954abe9cb, type: 3}
       propertyPath: m_LocalRotation.w
