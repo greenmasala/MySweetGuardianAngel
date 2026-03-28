@@ -27,7 +27,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="LevelMenuOverlay" style="flex-grow: 1; position: absolute; height: 100%; width: 100%; display: none;">
+    <ui:VisualElement name="LevelMenuOverlay" style="flex-grow: 1; position: absolute; display: none; height: 100%; width: 100%;">
         <ui:VisualElement name="AllBg" style="flex-grow: 1; position: absolute; height: 100%; width: 100%;">
             <ui:VisualElement name="Bg" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI%20Toolkit/UiAsset/BackgroundBlue02.svg?fileID=7388822144124034973&amp;guid=f2af8a56bf1175543ad6185b8f69fa98&amp;type=3#BackgroundBlue02&quot;); position: absolute; width: 100%; height: 100%;"/>
             <ui:VisualElement name="BgLevelMenu" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI%20Toolkit/UiAsset/BackgroundLevelMenu.svg?fileID=7388822144124034973&amp;guid=ff964ed70004be741ab2f325c8b55efa&amp;type=3#BackgroundLevelMenu&quot;); position: relative; height: auto; width: 1622px; margin-bottom: -175px; background-size: 103% 116%;"/>

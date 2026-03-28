@@ -37,9 +37,9 @@ public class Obstacle : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Player>())
         {
-            if (this.GetComponent<ConstantForce>())
+            if (collision.gameObject.GetComponent<ConstantForce>())
             {
-                this.GetComponent<ConstantForce>().enabled = false;
+                collision.gameObject.GetComponent<ConstantForce>().enabled = false;
             }
             hit = true;
         }
