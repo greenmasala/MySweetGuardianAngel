@@ -3242,9 +3242,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5711052370896006010, guid: 95d05d94f4d00314f96b9dc06242f5db, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: -2932666283545867464, guid: 95d05d94f4d00314f96b9dc06242f5db, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95d05d94f4d00314f96b9dc06242f5db, type: 3}
       propertyPath: m_Name
       value: level5 floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95d05d94f4d00314f96b9dc06242f5db, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
