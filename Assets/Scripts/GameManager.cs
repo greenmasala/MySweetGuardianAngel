@@ -115,6 +115,8 @@ public class GameManager : MonoBehaviour
         TransitionAnim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Debug.Log("Return to menu");
         TransitionAnim.SetTrigger("Clicked");
+        SceneManager.LoadScene("MainMenu");
+
     }
 
     void Win()

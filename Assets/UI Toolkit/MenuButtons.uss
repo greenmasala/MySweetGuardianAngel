@@ -1,0 +1,135 @@
+.button-play:hover {
+    scale: 1.1 1.1;
+    rotate: 0;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out-back;
+}
+
+.button-anim01:hover {
+    scale: 1 1;
+    rotate: -17deg;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out-back;
+}
+
+.button-anim02:hover {
+    rotate: 3deg;
+    transition-timing-function: ease-in-bounce;
+}
+
+.melt {
+    rotate: 0;
+    translate: 0 0;
+}
+
+.button-play:hover .melt {
+    rotate: 13deg;
+    translate: 35px 28px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.button-play:active .melt {
+    rotate: 26deg;
+    translate: 20px 28px;
+}
+
+.melt-drop {
+    translate: 0 0;
+}
+
+.button-play:active .melt-drop {
+    translate: 32px 68px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.lv-button-anim01 {
+    background-image: url("project://database/Assets/UI%20Toolkit/UiAsset/MedicBox.png?fileID=2147333253&guid=0070a29fb3c72164699f50ed90f68dbb&type=3#MedicBox_3");
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    transition-duration: 0.2s;
+}
+
+.medic-box:hover {
+    scale: 1.1 1.1;
+    rotate: 0;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out-back;
+}
+
+.medic-box:hover .lv-button-anim01 {
+    background-image: url("project://database/Assets/UI%20Toolkit/UiAsset/MedicBox.png?fileID=2147333253&guid=0070a29fb3c72164699f50ed90f68dbb&type=3#MedicBox_3");
+    -unity-background-image-tint-color: rgb(227, 54, 121);
+}
+
+.shadow-move {
+    translate: 0 0;
+}
+
+.medic-box:hover .shadow-move {
+    translate: -20px 10px;
+    transition-duration: 0.2s;
+}
+
+.halo {
+    translate: 0 0;
+}
+
+.house:hover .halo {
+    translate: 0 -84px;
+    transition-duration: 0.16s;
+}
+
+.visibility {
+    display: none;
+    opacity: 0;
+}
+
+.house:hover .visibility {
+    display: flex;
+    opacity: 1;
+}
+
+.icon5:hover {
+}
+
+.base {
+    background-image: url("project://database/Assets/UI%20Toolkit/UiAsset/Level5Icon.png?fileID=2138059454&guid=474c7fbe0480a9d48a00b0c06989443a&type=3#Level5Icon_2");
+    -unity-background-image-tint-color: rgb(152, 206, 206);
+}
+
+.icon5:hover .base {
+    background-image: url("project://database/Assets/UI%20Toolkit/UiAsset/Level5Icon.png?fileID=2138059454&guid=474c7fbe0480a9d48a00b0c06989443a&type=3#Level5Icon_2");
+    -unity-background-image-tint-color: rgb(253, 255, 146);
+}
+
+.flag-color:hover {
+    background-image: url("project://database/Assets/UI%20Toolkit/UiAsset/Level5Icon.png?fileID=-232156708&guid=474c7fbe0480a9d48a00b0c06989443a&type=3#Level5Icon_1");
+    -unity-background-image-tint-color: rgb(227, 54, 121);
+}
+
+.icon5:hover .visibility {
+    display: flex;
+    opacity: 1;
+}
+
+.level-button {
+}
+
+#LevelNum {
+    display: none;
+    opacity: 0;
+}
+
+.popup-active {
+    display: flex;
+    opacity: 1;
+}
+
+.level-button:hover #LevelNum {
+    display: flex;
+    opacity: 1;
+    transition-timing-function: ease-in-out-back;
+    transition-duration: 0.25s;
+    transition-delay: 0.001s;
+}

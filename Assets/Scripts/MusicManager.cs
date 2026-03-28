@@ -9,15 +9,14 @@ public class MusicManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            Debug.Log("setttt");
+            DontDestroyOnLoad(gameObject);
+            audioSource = GetComponent<AudioSource>();
+            Debug.Log("NEWSET");
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(transform.gameObject);
-        audioSource = GetComponent<AudioSource>();
     }
 
     public void PlayMusic()
